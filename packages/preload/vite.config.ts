@@ -4,6 +4,7 @@ import pkg from '../../package.json'
 
 export default defineConfig({
   root: __dirname,
+  envDir: process.cwd(),
   build: {
     outDir: '../../dist/preload',
     lib: {

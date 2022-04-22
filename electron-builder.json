@@ -1,8 +1,8 @@
 {
   "appId": "YouAppID",
-  "asar": true,
+  "asar": false,
   "directories": {
-    "output": "release/${version}"
+    "output": "dist_release/${version}"
   },
   "files": [
     "dist"
@@ -11,7 +11,8 @@
     "artifactName": "${productName}_${version}.${ext}",
     "target": [
       "dmg"
-    ]
+    ],
+    "darkModeSupport": true
   },
   "win": {
     "target": [
@@ -27,7 +28,10 @@
   "nsis": {
     "oneClick": false,
     "perMachine": false,
+    "allowElevation": true,
     "allowToChangeInstallationDirectory": true,
-    "deleteAppDataOnUninstall": false
+    "deleteAppDataOnUninstall": false,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true
   }
 }
