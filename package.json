@@ -1,6 +1,6 @@
 {
   "name": "electron-vue3",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/main/index.cjs",
   "author": "BWrong",
   "license": "ISC",
@@ -15,9 +15,8 @@
     "dev": "node scripts/watch.mjs",
     "prebuild": "node scripts/build.mjs",
     "build": "electron-builder",
-    "build:all": "electron-builder -mw",
+    "build:all": "npm run prebuild && electron-builder -mw",
     "tsc": "vue-tsc --noEmit --p packages/renderer/tsconfig.json",
-    "release": "npm run build -- -mwl --publish always",
     "changelog": "standard-version --infile CHANGELOG.md",
     "build-icons": "electron-icon-builder --input=./build/logo.png --output=build --flatten"
   },
