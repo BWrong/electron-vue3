@@ -49,7 +49,7 @@ const update = () => {
   padding-top: 4%;
   text-align: center;
   position: relative;
-  height: 100vh;
+  height: calc(100vh - 4%);
   overflow: hidden;
   .logo {
     margin: 30px auto 10px;
