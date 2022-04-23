@@ -25,6 +25,10 @@
 
 ![image-20220424001120604](https://cdn.jsdelivr.net/gh/BWrong/Pictures@master/uPic/20220424001121.png)
 
+## 导出配置
+
+![image-20220424001524105](https://cdn.jsdelivr.net/gh/BWrong/Pictures@master/uPic/20220424001524.png)
+
 ## TODO
 - [x] 基本框架搭建
 - [x] 数据存储: electron-store
