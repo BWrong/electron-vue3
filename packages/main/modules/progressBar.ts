@@ -4,10 +4,11 @@
 import { ipcMain } from "electron";
 import { win } from "../mainWindow";
 
+export const setProgress = (progress: number) => win?.setProgressBar(progress);
 
-ipcMain.on('set-progress', (event, arg) => {
+ipcMain.handle('setProgress', (event, arg) => {
   let progress = arg/100;
-  win?.setProgressBar(progress);
+  setProgress(progress);
 })
 
-ipcMain.on('remove-progress', (event) => win?.setProgressBar(-1))
+ipcMain.handle('removeProgress', (event) => setProgress(-1))

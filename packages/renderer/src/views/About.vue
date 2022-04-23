@@ -1,12 +1,12 @@
 <template>
   <div class="content-box">
     <div class="about">
-      <img class="logo" src="../../assets/images/logo.png" />
+      <img class="logo" src="../assets/images/logo.png" />
       <div class="appname">{{ appName }}</div>
       <div class="slogan"></div>
       <ul class="txt">
         <li>
-          软件版本：<span>{{ appVersion }}</span>
+          软件版本：<span>{{ versions.appVersion }}</span>
         </li>
         <li>
           Electron：<span>{{ versions.electron }}</span>
@@ -29,16 +29,19 @@
   </div>
 </template>
 <script lang="ts" setup>
-import pkg from '../../../../../package.json'
-const versions = window?.process.versions;
-console.log(versions);
-
-const appName = pkg.name;
+import { reactive, ref } from 'vue';
+import { electronApi } from '@/utils/electronApi';
+const appName = ref('');
+let versions = reactive<any>({});
+electronApi.getAppInfo().then((info:any) => {
+  appName.value = info.name;
+  Object.assign(versions, info.versions);
+})
  const openLog = () => {
-  // openUrlWithBrowser(config.logUrl);
+  electronApi.openUrlWithBrowser('https://www.bwrong.co');
 };
 const update = () => {
-  // ipcRenderer.send('checkForUpdate');
+  electronApi.checkUpdate();
 };
 </script>
 <style lang="less" scoped>

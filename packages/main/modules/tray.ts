@@ -1,7 +1,7 @@
 import path from 'path';
 import { app, nativeImage, dialog, Menu, Tray, MenuItem, MenuItemConstructorOptions, ipcMain } from 'electron';
 // https://github.com/maxogden/menubar
-import { menubar } from 'menubar'
+// import { menubar } from 'menubar'
 
 import { win } from '../mainWindow';
 import { APP_NAME, APP_VERSION } from '..';
@@ -9,16 +9,12 @@ let appTray: Tray | undefined;
 app.whenReady().then(createTray)
 app.on('will-quit', removeTray);
 
-ipcMain.on('hideTray', removeTray);
-ipcMain.on('showTray', createTray);
+ipcMain.handle('hideTray', removeTray);
+ipcMain.handle('showTray', createTray);
 
 const menuTemplate: Array<MenuItemConstructorOptions | MenuItem> = [
   {
     label: '帮助文档',
-    click: () => {}
-  },
-  {
-    label: '意见反馈',
     click: () => {}
   },
   {
@@ -72,11 +68,11 @@ function removeTray() {
   appTray = undefined;
 }
 // 创建menuBar
-function createMenuBar(tray: Tray) {
-  // TODO: 修复
-  // let url = import.meta.env.DEV ? `http://${process.env['VITE_DEV_SERVER_HOST']}:${process.env['VITE_DEV_SERVER_PORT']}/public/menuBar.html` : path.join(__dirname, '../renderer/menuBar.html');
-  menubar({
-    tray,
-    // index: url,
-  })
-}
+// function createMenuBar(tray: Tray) {
+//   // TODO: 修复
+//   let url = import.meta.env.DEV ? `http://${process.env['VITE_DEV_SERVER_HOST']}:${process.env['VITE_DEV_SERVER_PORT']}/public/menuBar.html` : path.join(__dirname, '../renderer/menuBar.html');
+//   menubar({
+//     tray,
+//     index: url,
+//   })
+// }

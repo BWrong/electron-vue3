@@ -20,8 +20,8 @@ async function createWindow() {
     autoHideMenuBar: true,
     webPreferences: {
       preload: join(__dirname, '../preload/index.cjs'),
-      nodeIntegration: true, // webview集成nodejsApi
-      contextIsolation: false
+      nodeIntegration: false, // 渲染进程集成nodejsApi，为了安全建议关闭
+      contextIsolation: true // 启用上下文隔离，开启更加安全, 开启后不能在渲染进程使用electronApi,需要通过preload中转
     }
   });
 
@@ -37,7 +37,6 @@ async function createWindow() {
     // 更新
     // updateHandle(win);
     // updateChecker();
-    // autoUpdater.checkForUpdatesAndNotify();
   }
   // 使用浏览器打开所有链接，而不是应用程序
   win.webContents.setWindowOpenHandler(({ url }) => {

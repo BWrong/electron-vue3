@@ -3,75 +3,75 @@
     <img class="logo" src="../assets/images/logo.png" alt="" />
     <div class="menu">
       <router-link class="menu-item" v-for="(item, index) in menu" :key="index" :to="item.link">
-        <!-- <icon :type="item.icon" /> -->
+        <IconFont :type="item.icon" fontSize="16px"></IconFont>
         <span class="title">{{ item.title }}</span>
       </router-link>
     </div>
     <div class="setting-bar">
-      <!-- <span class="setting-btn" title="设置" @click="goSetting"><SettingOutlined /></span>
-      <link-url class="setting-info" title="仓库" :url="repositoryUrl"><GithubOutlined /></link-url>
-      <link-url class="setting-info" title="文档" :url="docsUrl"><GlobalOutlined /></link-url> -->
-      <!-- <span class="setting-info" @click="toggleTheme"> -->
-        <!-- <a-tooltip :title="theme.title"> -->
-          <!-- <icon-font :type="theme.icon" /> -->
-        <!-- </a-tooltip> -->
-      <!-- </span> -->
+      <IconFont type="setting" @click="handleSetting"></IconFont>
+      <IconFont type="website" @click="handleWebsit"></IconFont>
+      <IconFont type="github" @click="handleGithub"></IconFont>
+      <n-popover>
+        <template #trigger>
+          <IconFont :type="themeObj.icon" @click="handleTheme" />
+        </template>
+        <span>{{ themeObj.title }}</span>
+      </n-popover>
     </div>
   </div>
 </template>
-<script lang="tsx">
-import { defineComponent } from 'vue';
+<script lang="tsx" setup>
+import { electronApi } from '@/utils/electronApi';
+import { computed, ref } from '@vue/reactivity';
+import { NativeTheme } from 'electron';
 import { useRouter } from 'vue-router';
-// import { RocketOutlined, CoffeeOutlined, BulbOutlined, SettingOutlined, GithubOutlined, GlobalOutlined, ToolOutlined, BuildOutlined, LikeOutlined } from '@ant-design/icons-vue';
-import LinkUrl from '@/components/LinkUrl.vue';
-import IconFont from './IconFont/index.vue';
-// import useTheme from '../hooks';
-export default defineComponent({
-  components: {
-    icon: (prop) => <prop.type style={{ fontSize: '16px' }} />,
-    // SettingOutlined,
-    // GithubOutlined,
-    // GlobalOutlined,
-    LinkUrl,
-    IconFont
-  },
-  setup() {
-    const router = useRouter();
-    const menu = [
-      {
-        title: '主页',
-        link: '/home'
-        // icon: <BulbOutlined />
-      },
-      {
-        title: '测试',
-        link: '/test'
-        // icon: <BulbOutlined />
-      },
-      {
-        title: '设置',
-        link: '/setting'
-        // icon: <SettingOutlined />
-      },
-      {
-        title: '关于',
-        link: '/about'
-        // icon: <BulbOutlined />
-      }
-    ];
 
-    const goSetting = () => router.push('/setting');
-    // const { theme, toggleTheme } = useTheme();
-    return {
-      menu: Object.freeze(menu),
-      goSetting,
-      repositoryUrl: '',
-      docsUrl: '',
-      // toggleTheme,
-      // theme
-    };
+const menu = [
+  {
+    title: '主页',
+    link: '/home',
+    icon: 'home'
+  },
+  {
+    title: '关于',
+    link: '/about',
+    icon: 'about'
   }
+];
+const router = useRouter();
+const handleSetting = () => router.push('/setting');
+const handleWebsit = () => electronApi.openUrlWithBrowser('https://www.brwong.co');
+const handleGithub = () => electronApi.openUrlWithBrowser('https://github.com/BWrong/electron-vue3');
+const themeList = {
+  system: {
+    icon: 'system',
+    next: 'light',
+    title: '跟随系统',
+    name: 'system'
+  },
+  light: {
+    icon: 'light',
+    next: 'dark',
+    title: '明亮模式',
+    name: 'light'
+  },
+  dark: {
+    icon: 'dark',
+    next: 'system',
+    title: '暗黑模式',
+    name: 'dark'
+  }
+};
+let theme = ref<NativeTheme['themeSource']>('system');
+const themeObj = computed(() => themeList[theme.value]);
+electronApi.getTheme().then((name: NativeTheme['themeSource']) => {
+  theme.value = name;
 });
+function handleTheme() {
+  electronApi.setTheme(themeObj.value.next as NativeTheme['themeSource']).then((res) => {
+    theme.value = res.themeSource;
+  });
+}
 </script>
 <style lang="less" scoped>
 @sider-bg: #f0f0f0;
@@ -86,7 +86,7 @@ export default defineComponent({
   .logo {
     width: 80px;
     display: block;
-    margin: 30px auto;
+    margin: 40px auto;
   }
 }
 .menu {
@@ -103,6 +103,7 @@ export default defineComponent({
     align-items: center;
     justify-content: flex-start;
     padding-left: 2em;
+    font-weight: bold;
     &.router-link-active {
       background: linear-gradient(120deg, @primary-secondary-color, @primary-color);
       color: #eee !important;
@@ -127,7 +128,11 @@ export default defineComponent({
   right: 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 30px;
+  font-size: 16px;
+  border-top: 1px solid rgba(#999, 0.2);
+
   & > span {
     margin: 8px;
     cursor: pointer;
@@ -142,6 +147,7 @@ export default defineComponent({
   .sider {
     background-color: #171718;
   }
+
   .menu {
     .menu-item {
       color: #aaa;

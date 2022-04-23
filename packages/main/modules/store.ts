@@ -1,16 +1,31 @@
-import Store from 'electron-store'
-export const createStore = () => {
-  const store = new Store();
-  store.set('unicorn', '🦄');
-  console.log(store.get('unicorn'));
-  //=> '🦄'
+import { app, ipcMain } from 'electron';
+import ElectronStore from 'electron-store';
+import Store, { Schema } from 'electron-store';
 
-  // Use dot-notation to access nested properties
-  store.set('foo.bar', true);
-  console.log(store.get('foo'));
-  //=> {bar: true}
+const defaults = {
+  theme: 'system',
+  autoUpdate: true,
+};
+type StoreType = typeof defaults;
+const schema: Schema<StoreType> = {
+  theme: {
+    type: 'string',
+    default: 'system'
+  },
+  autoUpdate: {
+    type: 'boolean',
+    default: true
+  }
+};
+export let store: ElectronStore<StoreType>;
 
-  store.delete('unicorn');
-  console.log(store.get('unicorn'));
-  return store
-}
+store = new Store<StoreType>({
+  defaults,
+  schema
+  // encryptionKey: 'my-encryption-key'
+});
+
+app.whenReady().then(() => {
+  ipcMain.handle('getStore',  (event,key) => key ? store.get(key) : store.store)
+  ipcMain.handle('setStore',  (event,data) => data && store.set(data))
+})

@@ -7,6 +7,7 @@ export default defineConfig({
   envDir: process.cwd(),
   build: {
     outDir: '../../dist/preload',
+    emptyOutDir:true,
     lib: {
       entry: 'index.ts',
       formats: ['cjs'],
@@ -18,7 +19,8 @@ export default defineConfig({
     rollupOptions: {
       external: [
         'electron',
-        ...builtinModules,
+        // ...builtinModules,
+        ...builtinModules.flatMap(p => [p, `node:${p}`]),
         ...Object.keys(pkg.dependencies || {}),
       ],
     },

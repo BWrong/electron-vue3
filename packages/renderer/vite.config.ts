@@ -1,16 +1,18 @@
 import { fileURLToPath, URL } from 'url';
 import { resolve } from 'path';
+import { builtinModules } from 'module';
 import { ConfigEnv, defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import viteResolve from 'vite-plugin-resolve';
 import { createHtmlPlugin } from 'vite-plugin-html';
-import electronRenderer from 'vite-plugin-electron/renderer';
+// import electronRenderer from 'vite-plugin-electron/renderer';
 import Components from 'unplugin-vue-components/vite';
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 import pkg from '../../package.json';
 // https://vitejs.dev/config/
 export default ({ command, mode }: ConfigEnv) => {
+  const IS_PRODUCTION = mode === 'production';
   // 读取环境配置
   const { VITE_DEV_SERVER_HOST, VITE_DEV_SERVER_PORT } = loadEnv(mode, process.cwd());
   return defineConfig({
@@ -30,7 +32,7 @@ export default ({ command, mode }: ConfigEnv) => {
         directoryAsNamespace: false,
         resolvers: [NaiveUiResolver()]
       }),
-      electronRenderer(),
+      // electronRenderer(),
       viteResolve(
         /**
          * Here you can specify other modules
@@ -55,7 +57,11 @@ export default ({ command, mode }: ConfigEnv) => {
     base: './',
     build: {
       sourcemap: true,
-      outDir: '../../dist/renderer'
+      outDir: '../../dist/renderer',
+      emptyOutDir: true,
+      rollupOptions: {
+        external: [...builtinModules.flatMap((p) => [p, `node:${p}`])]
+      }
     },
     server: {
       host: VITE_DEV_SERVER_HOST,
@@ -64,7 +70,8 @@ export default ({ command, mode }: ConfigEnv) => {
     resolve: {
       alias: {
         // 别名
-        '@': createPath('./src')
+        '@': createPath('./src'),
+        root: resolve(process.cwd())
       }
     },
     css: {

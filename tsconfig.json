@@ -10,8 +10,12 @@
     "sourceMap": true,
     "baseUrl": "./",
     "strict": true,
-    "paths": {},
+    "paths": {
+      "@/*": ["./packages/renderer/src/*"],
+      "root/*": ["./*"]
+    },
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
-  }
+  },
+  "include": ["packages/**/*.ts"]
 }

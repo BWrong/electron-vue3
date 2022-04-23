@@ -1,4 +1,23 @@
-import { domReady } from './utils'
+
+export const { appendLoading, removeLoading } = useLoading();
+domReady().then(appendLoading);
+
+
+/** docoment ready */
+export function domReady(condition: DocumentReadyState[] = ['complete', 'interactive']) {
+  return new Promise((resolve) => {
+    if (condition.includes(document.readyState)) {
+      resolve(true);
+    } else {
+      document.addEventListener('readystatechange', () => {
+        if (condition.includes(document.readyState)) {
+          resolve(true);
+        }
+      });
+    }
+  });
+}
+
 /**
  * https://tobiasahlin.com/spinkit
  * https://connoratherton.com/loaders
@@ -53,6 +72,3 @@ export function useLoading() {
     }
   };
 }
-const { appendLoading, removeLoading } = useLoading()
-window.removeLoading = removeLoading;
-domReady().then(appendLoading)

@@ -3,7 +3,6 @@ export { }
 
 declare global {
   interface Window {
-    removeLoading: () => void;
-
+    readonly electronApi: Readonly<typeof import('../../preload/index').exportApis>;
   }
 }

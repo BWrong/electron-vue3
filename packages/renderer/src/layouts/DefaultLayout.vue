@@ -11,7 +11,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import AppMenu from '@/components/AppMenu.vue';
+// import AppMenu from '@/components/AppMenu.vue';
 </script>
 <style lang="less" scoped>
 .frame {

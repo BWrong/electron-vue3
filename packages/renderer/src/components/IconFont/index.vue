@@ -5,11 +5,7 @@
     </svg>
   </span>
 </template>
-<script lang="ts">
-export default {
-  name: 'IconFont'
-}
-</script>
+
 <script lang="ts" setup>
 import { computed, defineProps } from 'vue';
 interface IProps {
