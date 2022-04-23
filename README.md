@@ -5,7 +5,7 @@
 
 客户端打包使用[electron-builder](https://www.electron.build/)，相关配置在`/electron-builder.js`中配置。
 
-为了更改的支持深色模式，UI框架选择[NaiveUI](https://www.naiveui.com/zh-CN/os-theme)。
+为了更好的支持深色模式，UI框架选择[NaiveUI](https://www.naiveui.com/zh-CN/os-theme)。
 
 ![image-20220424000800330](https://cdn.jsdelivr.net/gh/BWrong/Pictures@master/uPic/20220424000806.png)
 
