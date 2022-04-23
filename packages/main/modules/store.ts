@@ -6,7 +6,7 @@ const defaults = {
   theme: 'system',
   autoUpdate: true,
 };
-type StoreType = typeof defaults;
+export type StoreType = typeof defaults;
 const schema: Schema<StoreType> = {
   theme: {
     type: 'string',

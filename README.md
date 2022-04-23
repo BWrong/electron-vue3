@@ -3,7 +3,7 @@
 
 本模板采用[electron-vue-vite](https://github.com/caoxiemeihao/electron-vue-vite)为雏形搭建。
 
-客户端打包使用[electron-builder](https://www.electron.build/)，相关配置在`/electron-builder.json`中配置。
+客户端打包使用[electron-builder](https://www.electron.build/)，相关配置在`/electron-builder.js`中配置。
 
 为了更改的支持深色模式，UI框架选择[NaiveUI](https://www.naiveui.com/zh-CN/os-theme)。
 

@@ -1,6 +1,7 @@
 import {writeFile} from 'fs/promises'
 import { contextBridge, ipcRenderer, NativeTheme } from 'electron';
 import { appendLoading, removeLoading } from './loading';
+import { StoreType } from '../main/modules/store';
 export const exportApis = {
   getAppInfo: () => ipcRenderer.invoke('appInfo'), // 获取应用信息
   removeLoading, // 移除loading
@@ -15,7 +16,7 @@ export const exportApis = {
   setTheme: (theme: NativeTheme["themeSource"]) => ipcRenderer.invoke('setTheme', theme), // 设置主题
   getTheme: () => ipcRenderer.invoke('getTheme'), // 获取主题
   getStore: (key?: string) => ipcRenderer.invoke('getStore', key), // 获取store
-  setStore: (object: object) => ipcRenderer.invoke('setStore', object), // 设置store
+  setStore: (object: Partial<StoreType>) => ipcRenderer.invoke('setStore', object), // 设置store
   openDialog: (options: Electron.OpenDialogOptions) => ipcRenderer.invoke('openDialog', options), // 弹窗
   openDialogSync: (options: Electron.OpenDialogSyncOptions) => ipcRenderer.invoke('openDialogSync', options), // 同步弹窗
   saveDialog: (options: Electron.SaveDialogOptions) => ipcRenderer.invoke('saveDialog', options), // 弹窗
