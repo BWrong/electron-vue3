@@ -1,3 +1,4 @@
+import {writeFile} from 'fs/promises'
 import { contextBridge, ipcRenderer, NativeTheme } from 'electron';
 import { appendLoading, removeLoading } from './loading';
 export const exportApis = {
@@ -14,6 +15,14 @@ export const exportApis = {
   setTheme: (theme: NativeTheme["themeSource"]) => ipcRenderer.invoke('setTheme', theme), // 设置主题
   getTheme: () => ipcRenderer.invoke('getTheme'), // 获取主题
   getStore: (key?: string) => ipcRenderer.invoke('getStore', key), // 获取store
-  setStore: (object:object) => ipcRenderer.invoke('setStore', object), // 设置store
+  setStore: (object: object) => ipcRenderer.invoke('setStore', object), // 设置store
+  openDialog: (options: Electron.OpenDialogOptions) => ipcRenderer.invoke('openDialog', options), // 弹窗
+  openDialogSync: (options: Electron.OpenDialogSyncOptions) => ipcRenderer.invoke('openDialogSync', options), // 同步弹窗
+  saveDialog: (options: Electron.SaveDialogOptions) => ipcRenderer.invoke('saveDialog', options), // 弹窗
+  saveDialogSync: (options: Electron.SaveDialogSyncOptions) => ipcRenderer.invoke('saveDialogSync', options), // 同步弹窗
+  messageBox: (options: Electron.MessageBoxOptions) => ipcRenderer.invoke('messageBox', options), // 弹窗
+  messageBoxSync: (options: Electron.MessageBoxSyncOptions) => ipcRenderer.invoke('messageBoxSync', options), // 同步弹窗
+  errorBox: (title: string, content: string) => ipcRenderer.invoke('errorBox', { type: 'error', title, content }), // 弹窗
+  writeFile: (file: any, data: any) => writeFile(file, data), // 写文件
 };
 contextBridge.exposeInMainWorld('electronApi', exportApis);

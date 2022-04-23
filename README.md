@@ -7,11 +7,14 @@
 
 为了更改的支持深色模式，UI框架选择[NaiveUI](https://www.naiveui.com/zh-CN/os-theme)。
 
+
+说明：自动更新需要证书，所以目前只能通过请求检查是否有新版本，然后下载，引导用户手动升级。 将VITE_UPDATE_HOST设置为安装包对应的服务器地址即可，更新逻辑已写好, 见'./packages/main/modules/updater.ts',下载时dock栏有进度条。
+
 ## TODO
 - [x] 基本框架搭建
 - [x] 数据存储: electron-store
 - [x] vue devtools
-- [x] 自动更新, 因mac上需要签名，目前通过引导用户升级。 将VITE_UPDATE_HOST设置为安装包对应的服务器地址即可
+- [x] 自动更新
 - [x] 托盘图标
 - [x] 环境变量支持
 - [x] 安全化

@@ -5,4 +5,5 @@ import './themer';
 import './store';
 import './appInfo';
 import './shell'
-import './updater'
+import './updater';
+import './dialog'

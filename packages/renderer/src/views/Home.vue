@@ -1,5 +1,6 @@
 <template>
   <div class="content-box">
+    <div class="page-title">主页</div>
     <n-space>
       <n-button @click="hideTray">隐藏托盘图标</n-button>
       <n-button @click="showTray">显示托盘图标</n-button>

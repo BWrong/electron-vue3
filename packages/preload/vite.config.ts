@@ -15,7 +15,7 @@ export default defineConfig({
     },
     minify: process.env./* from mode option */NODE_ENV === 'production',
     // https://github.com/caoxiemeihao/electron-vue-vite/issues/61
-    sourcemap: 'inline',
+    sourcemap: false,
     rollupOptions: {
       external: [
         'electron',

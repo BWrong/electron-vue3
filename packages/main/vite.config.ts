@@ -20,7 +20,7 @@ export default defineConfig({
       fileName: () => '[name].cjs'
     },
     minify: process.env.NODE_ENV === 'production',
-    sourcemap: true,
+    sourcemap: false,
     rollupOptions: {
       external: [
         'electron',

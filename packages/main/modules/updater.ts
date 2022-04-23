@@ -54,7 +54,7 @@ export const checkVersion = async (isForce = false): Promise<void> => {
 app.whenReady().then(async () => {
   let autoUpdate = await store.get('autoUpdate');
   // 自动触发更新条件：系统开启自动更新、在线、打包版本
-  const hasAutoUpdate = autoUpdate && net.isOnline() && !app.isPackaged;
+  const hasAutoUpdate = autoUpdate && net.isOnline() && app.isPackaged;
   // 启动更新
   setTimeout(() => {
     hasAutoUpdate && checkVersion();

@@ -56,7 +56,7 @@ export default ({ command, mode }: ConfigEnv) => {
     ],
     base: './',
     build: {
-      sourcemap: true,
+      sourcemap: false,
       outDir: '../../dist/renderer',
       emptyOutDir: true,
       rollupOptions: {
