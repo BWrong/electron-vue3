@@ -6405,10 +6405,10 @@ vite-plugin-optimizer@^1.3.3:
   resolved "https://registry.npmmirror.com/vite-plugin-optimizer/-/vite-plugin-optimizer-1.3.3.tgz#c47b5bef3b124c3ed764f8cf7cb07554de40a7d4"
   integrity sha512-CsVJBGULVhdK5lFgY2DBRWdYDQzpxHNAcqQb4GSSPih8YY/UmBOtLy4+rU8kForAhbkzqH5ahnomJbrbzC/MhQ==
 
-vite-plugin-resolve@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.npmmirror.com/vite-plugin-resolve/-/vite-plugin-resolve-2.0.4.tgz#eb1cda8a453666136c70590aa0d9b39670f75d8e"
-  integrity sha512-RaJ+vH8YwDg/PsWfq5N2TIkMRe5LWQ7y/2D2UFl3Bzs+Jmp2y3VgFerriz7Y2W7DsrFIiLE56T16x7TVFH93WQ==
+vite-plugin-resolve@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.npmmirror.com/vite-plugin-resolve/-/vite-plugin-resolve-2.0.7.tgz#a280464887439929cfb5598bd7c604f58126a514"
+  integrity sha512-eJ7m801udC/pKpuPwkACtKeOlBvinS50q0KflKRYnIspbb9Q9zKAo2ItSgyImoAak3jbg7kivn/j+FFQD74VxA==
 
 vite@^2.9.5:
   version "2.9.5"
@@ -6454,7 +6454,7 @@ vue-router@^4.0.14:
   dependencies:
     "@vue/devtools-api" "^6.0.0"
 
-vue-tsc@^0.34.9:
+vue-tsc@^0.34.10:
   version "0.34.10"
   resolved "https://registry.npmmirror.com/vue-tsc/-/vue-tsc-0.34.10.tgz#f23b00ee53b74e484d55841b685ab69ecfd295a4"
   integrity sha512-rWU4SjDqk9ylQN2hbnyP+rEu8W2a712DWUmciX6rDnId1m8sN/cuypTKjWjHHjaBLWNKULoEakRTOvrQ4ainhw==
