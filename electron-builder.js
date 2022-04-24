@@ -6,12 +6,6 @@ module.exports = {
   directories: {
     output: 'dist_release/${version}'
   },
-  "publish": [
-    {
-      "provider": "generic",
-      "url": "http://localhost:8888/",//更新服务器地址,可为空
-    }
-  ],
   files: ['dist'],
   mac: {
     artifactName: '${productName}_${version}.${ext}',
@@ -33,21 +27,6 @@ module.exports = {
   linux: {
     icon: './build/icons/icon.icns',
     target: 'AppImage'
-  },
-  "dmg": {
-    "contents": [
-      {
-        "x": 410,
-        "y": 150,
-        "type": "link",
-        "path": "/Applications"
-      },
-      {
-        "x": 130,
-        "y": 150,
-        "type": "file"
-      }
-    ]
   },
   nsis: {
     oneClick: false,
