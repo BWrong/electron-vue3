@@ -25,8 +25,7 @@ export default defineConfig({
       external: [
         'electron',
         'electron-devtools-installer',
-        // ...builtinModules,
-        ...builtinModules.flatMap(p => [p, `node:${p}`]),
+        ...builtinModules,
         ...Object.keys(pkg.dependencies || {})
       ]
     }

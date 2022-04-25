@@ -28,6 +28,9 @@
 ## 导出配置
 
 ![image-20220424001524105](https://cdn.jsdelivr.net/gh/BWrong/Pictures@master/uPic/20220424001524.png)
+## 优化包体积
+默认electron-builder会将dependencies的依赖拷贝进包中，但是由于我们已经vite进行了打包，所以其实是不需要再拷贝dependencies，建议非平台编译的依赖，都放在devDependencies中，可以有效减少打包体积。
+
 
 ## TODO
 - [x] 基本框架搭建

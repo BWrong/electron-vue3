@@ -19,8 +19,7 @@ export default defineConfig({
     rollupOptions: {
       external: [
         'electron',
-        // ...builtinModules,
-        ...builtinModules.flatMap(p => [p, `node:${p}`]),
+        ...builtinModules,
         ...Object.keys(pkg.dependencies || {}),
       ],
     },

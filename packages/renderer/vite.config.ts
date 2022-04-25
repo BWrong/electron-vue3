@@ -60,7 +60,9 @@ export default ({ command, mode }: ConfigEnv) => {
       outDir: '../../dist/renderer',
       emptyOutDir: true,
       rollupOptions: {
-        external: [...builtinModules.flatMap((p) => [p, `node:${p}`])]
+        external: [
+          ...builtinModules
+        ]
       }
     },
     server: {
