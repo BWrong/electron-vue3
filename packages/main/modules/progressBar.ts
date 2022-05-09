@@ -1,7 +1,7 @@
  // 设置dock进度条
 
 
-import { ipcMain } from "electron";
+import { app, ipcMain } from "electron";
 import { win } from "../mainWindow";
 
 export const setProgress = (progress: number) => win?.setProgressBar(progress);

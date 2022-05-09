@@ -30,7 +30,7 @@ async function createWindow() {
      const url = `http://${process.env['VITE_DEV_SERVER_HOST']}:${process.env['VITE_DEV_SERVER_PORT']}`;
      win.loadURL(url);
     win.webContents.openDevTools();
-    import('./helpers/installVueDevtools').then(installDevtools => installDevtools.default());
+    // import('./helpers/installVueDevtools').then(installDevtools => installDevtools.default());
 
   } else {
     win.loadFile(join(__dirname, '../renderer/index.html'));

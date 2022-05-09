@@ -1,7 +1,7 @@
 # Electron-vue3
 基于electron和vue3搭建的桌面端项目模板。
 
-本模板采用[electron-vue-vite](https://github.com/caoxiemeihao/electron-vue-vite)为雏形搭建。
+本模板采用[electron-vite-vue](https://github.com/electron-vite/electron-vite-vue)为雏形搭建。
 
 客户端打包使用[electron-builder](https://www.electron.build/)，相关配置在`/electron-builder.js`中配置。
 

@@ -61,7 +61,8 @@ export default ({ command, mode }: ConfigEnv) => {
       emptyOutDir: true,
       rollupOptions: {
         external: [
-          ...builtinModules
+          ...builtinModules,
+          ...Object.keys(pkg.dependencies || {}),
         ]
       }
     },

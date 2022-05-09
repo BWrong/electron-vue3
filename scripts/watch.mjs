@@ -25,7 +25,7 @@ function watchMain(server) {
     name: 'electron-main-watcher',
     writeBundle() {
       electronProcess && electronProcess.kill()
-      electronProcess = spawn(electron, ['.'], { stdio: 'inherit', env })
+      electronProcess = spawn(electron, ['.','--trace-warnings'], { stdio: 'inherit', env })
     },
   }
 
@@ -34,7 +34,7 @@ function watchMain(server) {
     mode: 'development',
     plugins: [!debug && startElectron].filter(Boolean),
     build: {
-      watch: true,
+      watch: {},
     },
   })
 }
@@ -53,7 +53,7 @@ function watchPreload(server) {
       },
     }],
     build: {
-      watch: true,
+      watch: {},
     },
   })
 }

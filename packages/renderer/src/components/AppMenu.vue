@@ -40,7 +40,7 @@ const menu = [
 ];
 const router = useRouter();
 const handleSetting = () => router.push('/setting');
-const handleWebsit = () => electronApi.openUrlWithBrowser('https://www.brwong.co');
+const handleWebsit = () => electronApi.openUrlWithBrowser('https://www.bwrong.co');
 const handleGithub = () => electronApi.openUrlWithBrowser('https://github.com/BWrong/electron-vue3');
 const themeList = {
   system: {

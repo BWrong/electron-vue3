@@ -82,7 +82,7 @@ export function updateDownload(url:string) {
     saveAs: true,
     openFolderWhenDone: true,
     onProgress(res) {
-      setProgress(res.percent)
+      setProgress && setProgress(res.percent)
     },
     onCompleted() {
       setProgress(-1)

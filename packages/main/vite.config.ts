@@ -13,12 +13,12 @@ export default defineConfig({
   },
   build: {
     outDir: '../../dist/main',
-    emptyOutDir:true,
     lib: {
       entry: 'index.ts',
       formats: ['cjs'],
       fileName: () => '[name].cjs'
     },
+    emptyOutDir:true,
     minify: process.env.NODE_ENV === 'production',
     sourcemap: false,
     rollupOptions: {
