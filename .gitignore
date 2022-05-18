@@ -6,6 +6,7 @@ dist_release
 *.local
 .debug.env
 
+components.d.ts
 tmp
 **/.tmp
 release

@@ -4,7 +4,7 @@ import { builtinModules } from 'module';
 import { ConfigEnv, defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import viteResolve from 'vite-plugin-resolve';
+import viteResolve, { lib2esm } from 'vite-plugin-resolve';
 import { createHtmlPlugin } from 'vite-plugin-html';
 // import electronRenderer from 'vite-plugin-electron/renderer';
 import Components from 'unplugin-vue-components/vite';
@@ -40,8 +40,28 @@ export default ({ command, mode }: ConfigEnv) => {
          *    which will ensure that the electron-builder can package it correctly
          */
         {
-          // If you use electron-store, this will work
-          'electron-store': 'const Store = require("electron-store"); export default Store;'
+          // If you use the following modules, the following configuration will work
+          // What they have in common is that they will return - ESM format code snippets
+
+          // ESM format string
+          'electron-store': 'export default require("electron-store");',
+          // Use lib2esm() to easy to convert ESM
+          // Equivalent to
+          /**
+           * sqlite3: () => `
+           * const _M_ = require('sqlite3');
+           * const _D_ = _M_.default || _M_;
+           * export { _D_ as default }
+           * `
+           */
+          sqlite3: lib2esm('sqlite3', { format: 'cjs' }),
+          serialport: lib2esm(
+            // CJS lib name
+            'serialport',
+            // export memebers
+            ['SerialPort', 'SerialPortMock'],
+            { format: 'cjs' }
+          )
         }
       ),
       createHtmlPlugin({
@@ -60,10 +80,7 @@ export default ({ command, mode }: ConfigEnv) => {
       outDir: '../../dist/renderer',
       emptyOutDir: true,
       rollupOptions: {
-        external: [
-          ...builtinModules,
-          ...Object.keys(pkg.dependencies || {}),
-        ]
+        external: [...builtinModules, ...Object.keys(pkg.dependencies || {})]
       }
     },
     server: {
